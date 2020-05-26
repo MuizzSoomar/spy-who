@@ -23,8 +23,6 @@ const Routes = ({
   setPlayerId,
   playerName,
   setPlayerName
-  // timeFlag,
-  // setTimeFlag
 }) => (
 
     <Router history = {browserHistory}>   
@@ -40,8 +38,6 @@ const Routes = ({
               setPlayerId = {setPlayerId} 
               playerName = {playerName} 
               setPlayerName = {setPlayerName}
-              // timeFlag = {timeFlag}
-              // setTimeFlag = {setTimeFlag}
               /> }  
             />
           <Route path = "/join" exact render = {(props) => 
@@ -66,8 +62,6 @@ const Routes = ({
               setPlayerId = {setPlayerId} 
               playerName = {playerName} 
               setPlayerName = {setPlayerName}
-              // timeFlag = {timeFlag}
-              // setTimeFlag = {setTimeFlag}
               /> }
             />
           <Route path = "/game" exact component = {(props) => 

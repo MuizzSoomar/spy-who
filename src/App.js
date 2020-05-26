@@ -7,7 +7,6 @@ function App() {
   const [toLobby, setToLobby] = useState(false);
   const [playerId, setPlayerId] = useState('');
   const [playerName, setPlayerName] = useState('');
-  const [timeFlag, setTimeFlag] = useState(false)
 
    
   React.useEffect(() => {
@@ -31,9 +30,6 @@ function App() {
         setPlayerId = {setPlayerId} 
         playerName = {playerName} 
         setPlayerName = {setPlayerName} 
-        // timeFlag = {timeFlag}
-        // setTimeFlag = {setTimeFlag}
-
       />
     </>
   );

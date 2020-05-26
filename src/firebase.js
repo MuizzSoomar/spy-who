@@ -20,8 +20,22 @@ import {firebaseConfig} from './FirebaseConfig'
         .onSnapshot((doc)=> {
             setViews(doc.data().players)
         })
-    },[coll])      //[coll,game]
+    },[coll,game])      //[coll,game]
     return views
+}
+
+export function ViewTimeStart(coll,game) {
+  const [time, setTime] = useState('')
+  useEffect(() => {
+    firebase
+    .firestore()
+    .collection(coll)
+    .doc(game)
+    .onSnapshot((doc) => {
+        setTime(doc.data().time_start)
+    })
+  },[coll,game])
+  return time
 }
 
 export function DeleteFirebase(coll,game,id,name,length){

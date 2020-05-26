@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import firebase, {ViewFirebase, StopListening, DeleteFirebase} from './firebase';
+import firebase, {ViewFirebase, StopListening, DeleteFirebase, ViewTimeStart} from './firebase';
 import {Link} from 'react-router-dom'
 
 
 
 function Lobby(props) {
     const viewPlayers = ViewFirebase('games',props.code)
+    const viewSetTime = ViewTimeStart('games',props.code)
 
     function Leaving(){
         console.log('DELETING:')
@@ -15,8 +16,8 @@ function Lobby(props) {
         //StopListening('games');
     }
 
-    function StartGame(props){
-        // if(props.timeFlag == false){
+    function StartGame(){
+        if(viewSetTime === ''){
             firebase
             .firestore()
             .collection('games')
@@ -24,7 +25,7 @@ function Lobby(props) {
             .update({
                 time_start: Date.now()
             })
-        // }
+        }
     }
 
     return(
@@ -40,7 +41,7 @@ function Lobby(props) {
             </div>
             <div>
                 <Link to = 'game'>
-                    <button> Start Game </button>
+                    <button onClick = {StartGame}> Start Game </button>
                 </Link>
                 <Link to = '/'>
                     <button onClick = {Leaving}> Leave Game </button>

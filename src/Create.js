@@ -16,6 +16,7 @@ const onSubmit = (event) => {
     if(time === "" && host === ""){     setAlert("Enter Time and Name")     }
     else if(time === ""){               setAlert("Enter Time")             }
     else if(host === ""){               setAlert("Enter Name")             }
+
     else if (time !== "" && host !== ""){
         props.setToLobby(true);
         let hostId = GenerateCode(8)
@@ -33,11 +34,10 @@ const onSubmit = (event) => {
             }]
         })
         .then(() => {
-         console.log(`Submitted: \n Name = ${host} \n Time = ${time} \n Code = ${props.code}`);
+         console.log(`Created: \n Name = ${host} \n Time = ${time} \n Code = ${props.code}`);
          props.setToLobby(false)
          props.setPlayerId(hostId);
          props.setPlayerName(host)
-        //  props.setTimeFlag(true)
         })
         .catch((error) => {
             console.log("Error: ", error)
