@@ -8,8 +8,6 @@ const [name,setName] = useState('');
 const [join,setJoin] = useState('');
 const [alert,setAlert] = useState('');
 
-// I TOOK A SHIT
-
     function onSubmit(event) {
         event.preventDefault();
         if(name === "" && join === ""){     setAlert("Enter Name and Join Code")    }
