@@ -24,21 +24,35 @@ import {firebaseConfig} from './FirebaseConfig'
     return views
 }
 
-export function ViewTimeStart(coll,game) {
-  const [time, setTime] = useState('')
+export function ViewDocs(coll,game,field) {
+  const [fields, setFields] = useState('')
   useEffect(() => {
     firebase
     .firestore()
     .collection(coll)
     .doc(game)
     .onSnapshot((doc) => {
-        setTime(doc.data().time_start)
+        setFields(doc.data()[field])
     })
   },[coll,game])
-  return time
+  return fields
 }
 
-export function DeleteFirebase(coll,game,id,name,length){
+export function FirebaseStartGame(coll,game) {
+  const [startGame, setStartGame] = useState(false)
+  useEffect(() => {
+    firebase
+    .firestore()
+    .collection(coll)
+    .doc(game)
+    .onSnapshot((doc) => {
+      setStartGame(doc.data().start_game)
+  })
+  },[coll,game])
+  return startGame
+}
+
+export function DeleteFirebase(coll,game,id,name,length){     //Delete's player from game
   console.log("Number of Players before delete", length);
   if(length > 1){
     firebase
@@ -61,6 +75,9 @@ export function DeleteFirebase(coll,game,id,name,length){
   }
 }
 // Need to add validation if last person in player array, then do a document delete of the game
+
+
+
 
 
 export function StopListening(coll){

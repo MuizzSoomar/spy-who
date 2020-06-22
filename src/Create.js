@@ -28,6 +28,8 @@ const onSubmit = (event) => {
             host,
             time_min: parseInt(time),
             time_start: "",
+            start_game: false,
+            spy: "",
             code: props.code,                 
             players: [{name: host,
                         id: hostId

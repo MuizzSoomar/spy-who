@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import firebase, {ViewFirebase, StopListening, DeleteFirebase, ViewTimeStart} from './firebase';
-import {Link} from 'react-router-dom'
-
-
+import React, { useState, useEffect } from 'react';
+import firebase, {ViewFirebase, StopListening, DeleteFirebase, ViewDocs, FirebaseStartGame} from './firebase';
+import {Link, Redirect} from 'react-router-dom'
 
 function Lobby(props) {
     const viewPlayers = ViewFirebase('games',props.code)
-    const viewSetTime = ViewTimeStart('games',props.code)
+    const viewSetTime = ViewDocs('games',props.code,"time_start")
+    const [startGame, setStartGame] = useState(false)
 
     function Leaving(){
         console.log('DELETING:')
@@ -16,19 +15,34 @@ function Lobby(props) {
         //StopListening('games');
     }
 
+    useEffect(() => {
+        firebase
+        .firestore()
+        .collection('games')
+        .doc(props.code)
+        .onSnapshot((doc) => {
+            console.log('game started')
+            setStartGame(doc.data().start_game)
+        })
+    },[])
+
     function StartGame(){
         if(viewSetTime === ''){
-            firebase
+            firebase 
             .firestore()
             .collection('games')
             .doc(props.code)
             .update({
-                time_start: Date.now()
+                time_start: Date.now(),
+                start_game: true
+
             })
+            setStartGame(true)
         }
     }
 
     return(
+        startGame ? <Redirect to= '/game' /> :
         <>
             <div> You are in the lobby!</div>
             <div> Game Code: {props.code} </div>

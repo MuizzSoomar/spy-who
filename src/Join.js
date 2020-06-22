@@ -24,7 +24,7 @@ const [alert,setAlert] = useState('');
                 players: firebase.firestore.FieldValue.arrayUnion({name: name, id: playerId})
             })
             .then(() =>{
-                console.log(`Joined: \n Name: ${name} \n Join Code: ${join}`); 
+                console.log(`Joined: \n Name: ${name} \n ID: ${playerId} \n Join Code: ${join}`); 
                 props.setToLobby(false)
                 props.setPlayerName(name);
                 props.setPlayerId(playerId)
